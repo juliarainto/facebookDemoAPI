@@ -1,0 +1,270 @@
+/* eslint no-console: 0 */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#headline-2 {
+  margin: 30px 0;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.flex-row {
+  padding: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+}
+/* ***************************************** */
+.button {
+  background-color: #3b5998;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: "Titillium Web", sans-serif;
+}
+/* ***************************************** */
+
+#fb-content {
+  height: 360px;
+  display: table;
+  background-color: #f2f2f2;
+  border-bottom: 10px solid #ffffff;
+  font-family: "Titillium Web", sans-serif;
+}
+
+.fb-item a {
+  text-decoration: none;
+}
+
+.fb-item {
+  font-family: "Titillium Web", sans-serif;
+  align-content: center;
+  justify-content: center;
+  align-items: baseline;
+  background-size: cover;
+  display: block;
+  min-height: 200px;
+  min-width: 370px;
+  margin: 0 10px 0 10px;
+  line-height: 1.4rem;
+  flex: 1;
+}
+
+.fb-text {
+  background: rgba(23, 23, 23, 0.7) none repeat scroll 0 0;
+  font-family: "Titillium Web", sans-serif;
+  text-align: left;
+  display: block;
+  height: 200px;
+  width: 370px;
+  flex: 1;
+}
+
+.fb-text p1 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.fb-text:hover {
+  background: rgba(23, 23, 23, 0.9) none repeat scroll 0 0;
+}
+
+.fb_pub {
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  color: #a4a4a4;
+}
+
+.fb-textfield {
+  padding: 70px 10px 0 30px;
+}
+
+.socialmedia {
+  padding-top: 15px;
+  justify-content: left;
+  align-items: baseline;
+  text-decoration: none;
+  line-height: 1.8rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.6rem;
+  color: #ffffff;
+  font-family: "Titillium Web", sans-serif;
+}
+
+.socialmedia p {
+  font-weight: bold;
+  justify-content: left;
+  text-decoration: none;
+  line-height: 1.8rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  margin: 0 10px 0 0;
+  color: #ffffff;
+}
+#posts {
+  display: block;
+  float: left;
+}
+.fb-row {
+  float: left;
+}
+@media (max-width: 1270px) {
+  #fb-content {
+    padding: 0 0 50px 0;
+  }
+  #fb-info {
+    justify-content: center;
+    align-content: center;
+  }
+  .fb-item {
+    min-width: 370px;
+    max-width: 370px;
+    margin: 20px;
+    flex: 0 25%;
+  }
+}
+@media (max-width: 1670px) {
+  /* Media info kaksi riviseksi! */
+  .fb-text,
+  .fb-item {
+    min-width: 320px;
+    max-width: 320px;
+  }
+}
+@media (max-width: 1470px) {
+  /* Media info kaksi riviseksi! */
+  .fb-text,
+  .fb-item {
+    min-width: 280px;
+    max-width: 280px;
+  }
+}
+@media (max-width: 1270px) {
+  /* Media info kaksi riviseksi! */
+  .fb-text,
+  .fb-item {
+    min-width: 370px;
+    max-width: 370px;
+  }
+  #posts {
+    padding: 0 100px;
+  }
+}
+@media (max-width: 1170px) {
+  /* Media info kaksi riviseksi! */
+  #fb-content {
+    height: 100%;
+    width: 100%;
+    padding: 0 0 50px 0;
+  }
+  #fb-info {
+    height: 100%;
+  }
+}
+@media (max-width: 1070px) {
+  #posts {
+    padding: 0 200px;
+  }
+}
+@media (max-width: 870px) {
+  #posts {
+    padding: 0 100px;
+  }
+}
+@media (max-width: 670px) {
+  #posts {
+    padding: 0;
+  }
+}
+@media (max-width: 470px) {
+  .fb-text,
+  .fb-item {
+    max-width: 280px;
+    min-width: 280px;
+  }
+}
+@media (max-width: 350px) {
+  .fb-text,
+  .fb-item {
+    margin: 1px;
+  }
+  .fb-row {
+    padding: 0 5px;
+  }
+}
+
+/* ************** content width ******************* */
+.content-col {
+  width: 100%;
+  clear: both;
+}
+
+.center-col {
+  width: 1600px;
+  clear: both;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 1670px) {
+  .center-col {
+    width: 1400px;
+  }
+}
+
+@media only screen and (max-width: 1470px) {
+  .center-col {
+    width: 1200px;
+  }
+}
+
+@media only screen and (max-width: 1270px) {
+  .center-col {
+    width: 1025px;
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  .center-col {
+    width: 800px;
+  }
+}
+@media only screen and (max-width: 870px) {
+  .center-col {
+    width: 600px;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .center-col {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .center-col {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  .center-col {
+    width: 100%;
+  }
+}

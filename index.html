@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Facebook nostot</title>
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+</head>
+
+<body>
+
+  <!--NÄKYISI VAIN WEBIOSSA-->
+  <a href="https://OMAOSOITE.fi:3005/auth/facebook/" target="_blank" class="button">Kirjaudu sisään hyväksyäksesi käytön</a>
+  <!--NÄKYISI VAIN WEBIOSSA-->
+
+  <div id="fb-content" class="content-col">
+    <div id="headline-2">
+      <h2>FACEBOOK API</h2>
+    </div>
+    <div id="fb-info" class="center-col">
+      <div id="posts"></div>
+    </div>
+  </div>
+
+  <link href="./content/css/style.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script>
+    'use strict';
+
+    document.addEventListener("DOMContentLoaded", async function () {
+      console.log('Document ready!');
+
+      // Initial config
+      var pageID = '';
+      var limit = 4;
+
+      // Code comes here, dont change if possible
+      // This is the element(ID) where we append the fetched data
+      var appendToMe = document.getElementById("posts");
+      // Clear the old data from HTML body
+      appendToMe.innerHTML = "";
+
+      // Get current time
+      var timeNow = Date.now();
+
+      try {
+        // 'Functions'
+
+        // Here we fetch fresh data from FB api
+        var getPageData = function getPageData() {
+          return new Promise(function (resolve, reject) {
+            return (
+              // URL/page_id/how_many_newest_posts_to_return
+              fetch('https://ADDRESS_HERE.fi:3005/' + pageID + '/' + limit).then(function (response) {
+                return response.json();
+              }).then(function (data) {
+                return resolve(data);
+              }).catch(function (e) {
+                return reject(e);
+              })
+            );
+          });
+        };
+
+        // Here we appends the new or old data to the html body
+        var appendElements = function appendElements(data) {
+          return new Promise(function (resolve, reject) {
+            return console.log(data), data.forEach(function (item, index) {
+              if (index < limit) {
+                // Get likes, comments and shares from each post
+                var created_time = item.created_time;
+                var parsedTime = created_time.split('T')[0];
+                parsedTime = parsedTime.split('-')[2] + '.' + parsedTime.split('-')[1] + '.' + parsedTime.split('-')[0];
+
+                var message = item.message ? item.message.substring(0, 110) : "";
+
+                var likes = item.likes.summary.total_count;
+                var comments = item.comments.summary.total_count;
+                var shares = item.shares ? item.shares.count : 0;
+                var picture = item.full_picture ? item.full_picture : 'https://graph.facebook.com/' + pageID + '/picture?width=480&height=480';
+                var link = item.link;
+
+                // Next append the elements to the UI
+                var div = document.createElement('div');
+
+                div.className = 'fb-row';
+
+                div.innerHTML =
+                  `<div class="fb-item" style="background: url(${picture}) center center no-repeat; background-size: cover">
+                  <a target=_blank href="${link}">    
+                    <div class="fb-text">
+                      <div class="fb-textfield">
+                        <div class="fb_pub"><p>${parsedTime}</p></div>
+                          <div class="fb-textext"><p1>${message}</p1></div>
+                          <div class="socialmedia flex-row">
+                            <i class="fa fa-thumbs-up"></i>
+                            <p>${likes}</p>
+                            <i class="fa fa-comment"></i>
+                            <p>${comments}</p>
+                            <i class="fas fa-share"></i>
+                            <p>${shares}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                `;
+
+                appendToMe.appendChild(div);
+              }
+            });
+          });
+        };
+
+        var previousFetch = localStorage.getItem('expiration');
+        var xhr = new XMLHttpRequest();
+        console.log(xhr);
+        xhr.onreadystatechange = async function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            // Append the data to body
+            var response = JSON.parse(xhr.responseText);
+            console.log(response);
+            if (response.success) {
+              await appendElements(response.data.data);
+            }
+          }
+        };
+        xhr.open('GET', 'https://ADDRESS_HERE.fi:3005/' + pageID + '/' + limit, true);
+        xhr.send(null);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  </script>
+</body>
+
+</html>
